@@ -76,6 +76,7 @@ app.get('/smssent', function (req, res) {
   res.send('');
 });
 
-app.listen(3000, function () {
+const PORT = process.env.PORT || 5000
+app.listen(PORT, function () {
   console.log('Example app listening on port 3000!');
 });
