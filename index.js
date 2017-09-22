@@ -1,14 +1,14 @@
-var express = require('express');
-var ConversationV1 = require('watson-developer-cloud/conversation/v1');
+const express = require('express');
+const ConversationV1 = require('watson-developer-cloud/conversation/v1');
 
-var app = express();
+const app = express();
 
 var contexts = [];
 
-app.get('/smssent', function (req, res) {
-  var message = req.query.Body;
-  var number = req.query.From;
-  var twilioNumber = req.query.To;
+app.get('/smssent',  (req, res) => {
+  const message = req.query.Body;
+  const number = req.query.From;
+  const twilioNumber = req.query.To;
 
   var context = null;
   var index = 0;
@@ -79,4 +79,4 @@ app.get('/smssent', function (req, res) {
 const PORT = process.env.PORT || 5000
 app.listen(PORT, function () {
   console.log('Example app listening on port 3000!');
-});
+});  
