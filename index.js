@@ -25,8 +25,8 @@ app.get('/smssent', function (req, res) {
   console.log('Recieved message from ' + number + ' saying \'' + message  + '\'');
 
   var conversation = new ConversationV1({
-    username: '',
-    password: '',
+    username: process.env.WATSON_KEY,
+    password: process.env.WATSON_SECRET,
     version_date: ConversationV1.VERSION_DATE_2016_09_20
   });
 
@@ -35,7 +35,7 @@ app.get('/smssent', function (req, res) {
 
   conversation.message({
     input: { text: message },
-    workspace_id: '',
+    workspace_id: process.env.WATSON_WORKSPACE_ID,
     context: context
    }, function(err, response) {
        if (err) {
@@ -57,8 +57,8 @@ app.get('/smssent', function (req, res) {
          }
 
          var client = require('twilio')(
-           '',
-           ''
+           process.env.TWILIO_SID,
+           process.env.TWILIO_TOKEN
          );
 
          client.messages.create({
