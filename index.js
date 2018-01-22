@@ -23,7 +23,7 @@ app.get('/smssent', (req, res) => {
   });
 
   // You know, debugging stuff
-  console.log('Recieved message from ' + number + " saying '" + message + "'");
+  console.log(`Recieved message from ${number} saying '${message}'`);
 
   // Setup the Watson Converstion with your keys. Use .env file, duh!
   const conversation = new ConversationV1({
@@ -32,14 +32,14 @@ app.get('/smssent', (req, res) => {
     version_date: ConversationV1.VERSION_DATE_2016_09_20
   });
 
-  console.log(JSON.stringify(context));
+  console.log('CURRENT CONVO ', JSON.stringify(context));
   console.log(contexts.length);
 
   conversation.message(
     {
       input: { text: message },
       workspace_id: process.env.WATSON_WORKSPACE_ID,
-      context: context
+      context
     },
     function(err, response) {
       if (err) {
@@ -53,7 +53,7 @@ app.get('/smssent', (req, res) => {
         }
 
         let intent = response.intents[0].intent;
-        console.log(intent);
+        console.log('CURRENT PHASE ', intent);
         if (intent == 'done') {
           contexts.splice(contextIndex, 1);
           // Call REST API here (order pizza, etc.)
@@ -86,5 +86,5 @@ app.get('/smssent', (req, res) => {
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
-  console.log('Example app listening on port 3000!');
+  console.log('Watson is listening on port ${PORT}!');
 });
