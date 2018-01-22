@@ -56,9 +56,8 @@ app.get('/smssent', (req, res) => {
         console.log(intent);
         if (intent == 'done') {
           const order = contexts.splice(contextIndex, 1);
-          console.log('NEW ORDER! ');
-          console.log('FROM: ', order[0]);
-          console.log('context: ', order[1]);
+          console.log('place ', contextIndex);
+          console.log('NEW ORDER! ', contexts);
           // Call REST API here (order pizza, etc.)
         }
 
