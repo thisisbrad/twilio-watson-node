@@ -53,9 +53,10 @@ app.get('/smssent', (req, res) => {
         }
 
         let intent = response.intents[0].intent;
-        console.log('CURRENT PHASE ', intent);
+        console.log(intent);
         if (intent == 'done') {
-          contexts.splice(contextIndex, 1);
+          const order = contexts.splice(contextIndex, 1);
+          console.log('NEW ORDER! ', order);
           // Call REST API here (order pizza, etc.)
         }
 
@@ -86,5 +87,5 @@ app.get('/smssent', (req, res) => {
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
-  console.log('Watson is listening on port ${PORT}!');
+  console.log(`Watson is listening on port ${PORT}!`);
 });
