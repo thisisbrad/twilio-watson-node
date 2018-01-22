@@ -1,11 +1,11 @@
-const express = require("express");
-const ConversationV1 = require("watson-developer-cloud/conversation/v1");
+const express = require('express');
+const ConversationV1 = require('watson-developer-cloud/conversation/v1');
 
 const app = express();
 
 var contexts = [];
 
-app.get("/smssent", (req, res) => {
+app.get('/smssent', (req, res) => {
   const message = req.query.Body; // Grabs the text message
   const number = req.query.From; // Grabs the from cell number
   const twilioNumber = req.query.To; // Grabs the Twilio cell number
@@ -23,7 +23,7 @@ app.get("/smssent", (req, res) => {
   });
 
   // You know, debugging stuff
-  console.log("Recieved message from " + number + " saying '" + message + "'");
+  console.log('Recieved message from ' + number + " saying '" + message + "'");
 
   // Setup the Watson Converstion with your keys. Use .env file, duh!
   const conversation = new ConversationV1({
@@ -54,12 +54,12 @@ app.get("/smssent", (req, res) => {
 
         let intent = response.intents[0].intent;
         console.log(intent);
-        if (intent == "done") {
+        if (intent == 'done') {
           contexts.splice(contextIndex, 1);
           // Call REST API here (order pizza, etc.)
         }
 
-        const client = require("twilio")(
+        const client = require('twilio')(
           process.env.TWILIO_SID,
           process.env.TWILIO_TOKEN
         );
@@ -80,11 +80,11 @@ app.get("/smssent", (req, res) => {
     }
   );
 
-  res.send("");
+  res.send('');
 });
 
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
-  console.log("Example app listening on port 3000!");
+  console.log('Example app listening on port 3000!');
 });
