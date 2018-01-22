@@ -32,7 +32,7 @@ app.get('/smssent', (req, res) => {
     version_date: ConversationV1.VERSION_DATE_2016_09_20
   });
 
-  console.log('CURRENT CONVO ', JSON.stringify(context));
+  console.log('CURRENT CONVO 1:', JSON.stringify(context));
   console.log(contexts.length);
 
   conversation.message(
@@ -45,7 +45,8 @@ app.get('/smssent', (req, res) => {
       if (err) {
         console.error(err);
       } else {
-        console.log(response.output.text[0]);
+        console.log('2', response.output.text[0]);
+        console.log('2', response);
         if (context == null) {
           contexts.push({ from: number, context: response.context });
         } else {
