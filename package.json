@@ -4,7 +4,7 @@
   "description": "Twilio Watson Node bot",
   "main": "index.js",
   "engines": {
-    "node": "6.11.1"
+    "node": "8.7.0"
   },
   "dependencies": {
     "dotenv": "^4.0.0",
@@ -21,11 +21,7 @@
     "type": "git",
     "url": "git+https://github.com/thisisbrad/twilio-watson-node.git"
   },
-  "keywords": [
-    "Twilio",
-    "Watson",
-    "Node"
-  ],
+  "keywords": ["Twilio", "Watson", "Node"],
   "author": "Brad Beltowski",
   "license": "ISC",
   "bugs": {
