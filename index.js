@@ -74,6 +74,7 @@ app.get('/smssent', (req, res) => {
 
         // Nuts
         if ((intent == 'no' || intent == 'yes') && order.nuts == undefined) {
+          console.log('Old Value! ', order.nuts);
           order.nuts = intent;
           console.log('Picking nuts! ', order.nuts);
         }
