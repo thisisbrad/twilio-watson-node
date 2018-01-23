@@ -1,4 +1,5 @@
 const express = require('express');
+const mongoose = require('mongoose');
 const ConversationV1 = require('watson-developer-cloud/conversation/v1');
 
 const app = express();
