@@ -63,6 +63,11 @@ app.get('/smssent', (req, res) => {
           console.log(`They picked a ${order.size} size`);
         }
 
+        if (intent == 'flavour') {
+          console.log('IN FLAVOUR! ', response.intents[0]);
+          // Call REST API here (order pizza, etc.)
+        }
+
         if (intent == 'done') {
           const order = contexts.splice(contextIndex, 1);
           console.log('Complete! ', order);
