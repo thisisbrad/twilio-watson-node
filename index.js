@@ -3,6 +3,12 @@ const ConversationV1 = require('watson-developer-cloud/conversation/v1');
 
 const app = express();
 
+const mongoURI = process.env.MONGO_URI;
+
+mongoose.connect(mongoURI);
+
+const Order = require('./models/Order');
+
 let contexts = [];
 const order = {}; // Setup empty order
 const sizeRx = RegExp('size_*', 'g'); // RegEx for size
@@ -43,7 +49,7 @@ app.get('/smssent', (req, res) => {
       workspace_id: process.env.WATSON_WORKSPACE_ID,
       context
     },
-    function(err, response) {
+    (err, response) => {
       if (err) {
         console.error(err);
       } else {
@@ -57,7 +63,7 @@ app.get('/smssent', (req, res) => {
           contexts[contextIndex].context = response.context;
         }
 
-        let intent = response.intents[0].intent;
+        const intent = response.intents[0].intent;
         console.log(intent);
         // Catpure selected size
         if (sizeRx.test(intent)) {
@@ -89,7 +95,10 @@ app.get('/smssent', (req, res) => {
         if (intent == 'done') {
           const context = contexts.splice(contextIndex, 1);
           console.log('Complete! ', order);
+          const newOrder = new Order(order);
+          newOrder.save();
           // SAVE TO MONGODB!
+          // Then send push notifaction!
         }
 
         const client = require('twilio')(

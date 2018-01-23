@@ -9,6 +9,7 @@
   "dependencies": {
     "dotenv": "^4.0.0",
     "express": "^4.15.4",
+    "mongoose": "^5.0.1",
     "twilio": "^3.6.7",
     "watson-developer-cloud": "^2.39.0"
   },
@@ -21,7 +22,11 @@
     "type": "git",
     "url": "git+https://github.com/thisisbrad/twilio-watson-node.git"
   },
-  "keywords": ["Twilio", "Watson", "Node"],
+  "keywords": [
+    "Twilio",
+    "Watson",
+    "Node"
+  ],
   "author": "Brad Beltowski",
   "license": "ISC",
   "bugs": {
