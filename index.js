@@ -71,18 +71,18 @@ app.get('/smssent', (req, res) => {
           console.log(order);
         }
 
-        // Nuts
-        if (intent == 'no' || (intent == 'yes' && order.flavor)) {
-          order.nuts = intent;
-          console.log('Picking nuts! ', order.nuts);
-        }
-
         // Cherries
         if (intent == 'no' || (intent == 'yes' && order.nuts)) {
           // const order = contexts.splice(contextIndex, 1);
           order.cherry = intent;
-          console.log('Picking nuts! ', order.cherry);
+          console.log('Picking CHERRY! ', order.cherry);
           // Call REST API here (order pizza, etc.)
+        }
+
+        // Nuts
+        if (intent == 'no' || (intent == 'yes' && order.flavor)) {
+          order.nuts = intent;
+          console.log('Picking nuts! ', order.nuts);
         }
 
         if (intent == 'done') {
