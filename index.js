@@ -5,6 +5,7 @@ const app = express();
 
 let contexts = [];
 const order = {};
+const sizeRx = RegExp('size_*', 'g');
 
 app.get('/smssent', (req, res) => {
   const message = req.query.Body; // Grabs the text message
@@ -48,8 +49,8 @@ app.get('/smssent', (req, res) => {
       } else {
         console.log(response.output.text[0]);
         if (context == null) {
-          console.log('in here', response.context);
-          order.from = number;
+          order.convo_id = response.context.conversation_id; // attach convo id to the order
+          order.from = number; // attach the user's phone number
           contexts.push({ from: number, context: response.context });
         } else {
           contexts[contextIndex].context = response.context;
@@ -57,15 +58,14 @@ app.get('/smssent', (req, res) => {
 
         let intent = response.intents[0].intent;
         console.log(intent);
-        if (intent == 'done') {
-          // const order = contexts.splice(contextIndex, 1);
-          // Call REST API here (order pizza, etc.)
+        if (sizeRx.test(intent)) {
+          // deep dive into the data
+          console.log('IN SIZE!', response.intents);
         }
 
         if (intent == 'done') {
           const order = contexts.splice(contextIndex, 1);
-          console.log('place ', contextIndex);
-          console.log('NEW ORDER! ', contexts);
+          console.log('Complete! ', order);
           // Call REST API here (order pizza, etc.)
         }
 
