@@ -60,12 +60,13 @@ app.get('/smssent', (req, res) => {
         console.log(intent);
         if (sizeRx.test(intent)) {
           order.size = intent.replace('size_', '');
-          console.log(`They picked a ${order.size} size`);
+          console.log(`They picked a ${order.size} size.`);
         }
 
         if (intent == 'flavor') {
-          console.log('IN flavor! ', response.entities);
-          // Call REST API here (order pizza, etc.)
+          console.log('IN flavor! ', response.entities[0].value);
+          order.flavor = response.entities[0].value;
+          console.log(`They picked ${order.flavor} flavor.`);
         }
 
         if (intent == 'done') {
