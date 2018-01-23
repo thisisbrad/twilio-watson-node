@@ -54,7 +54,7 @@ app.get('/smssent', (req, res) => {
       if (err) {
         console.error(err);
       } else {
-        console.log(response);
+        // console.log(response);
         // console.log(response.output.text[0]);
         if (context == null) {
           order.convo_id = response.context.conversation_id; // attach convo id to the order
