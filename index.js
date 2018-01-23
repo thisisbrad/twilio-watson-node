@@ -79,7 +79,10 @@ app.get('/smssent', (req, res) => {
         }
         console.log('here???', order.nuts);
         // Cherries
-        if (intent == 'no' || (intent == 'yes' && order.nuts)) {
+        if (
+          intent == 'no' ||
+          (intent == 'yes' && order.nuts && !orders.cherry)
+        ) {
           // const order = contexts.splice(contextIndex, 1);
           order.cherry = intent;
           console.log('Picking CHERRY! ', order.cherry);
