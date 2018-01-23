@@ -16,7 +16,7 @@ app.get('/smssent', (req, res) => {
   let index = 0;
   let contextIndex = 0;
   contexts.forEach(value => {
-    console.log(value.from);
+    // console.log(value.from);
     if (value.from == number) {
       context = value.context;
       contextIndex = index;
@@ -34,8 +34,8 @@ app.get('/smssent', (req, res) => {
     version_date: ConversationV1.VERSION_DATE_2016_09_20
   });
 
-  console.log(JSON.stringify(context));
-  console.log(contexts.length);
+  // console.log(JSON.stringify(context));
+  // console.log(contexts.length);
 
   conversation.message(
     {
@@ -47,7 +47,8 @@ app.get('/smssent', (req, res) => {
       if (err) {
         console.error(err);
       } else {
-        console.log(response.output.text[0]);
+        console.log(response);
+        // console.log(response.output.text[0]);
         if (context == null) {
           order.convo_id = response.context.conversation_id; // attach convo id to the order
           order.from = number; // attach the user's phone number
@@ -67,10 +68,15 @@ app.get('/smssent', (req, res) => {
           console.log('IN flavor! ', response.entities[0].value);
           order.flavor = response.entities[0].value;
           console.log(`They picked ${order.flavor} flavor.`);
+          console.log(order);
         }
 
+        // Nuts
+
+        // Cherries
+
         if (intent == 'done') {
-          const order = contexts.splice(contextIndex, 1);
+          // const order = contexts.splice(contextIndex, 1);
           console.log('Complete! ', order);
           // Call REST API here (order pizza, etc.)
         }
