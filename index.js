@@ -81,7 +81,7 @@ app.get('/smssent', (req, res) => {
         // Cherries
         if (
           intent == 'no' ||
-          (intent == 'yes' && order.nuts && orders.cherry == undefined)
+          (intent == 'yes' && order.nuts && order.cherry == undefined)
         ) {
           // const order = contexts.splice(contextIndex, 1);
           order.cherry = intent;
