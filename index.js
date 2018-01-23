@@ -72,13 +72,6 @@ app.get('/smssent', (req, res) => {
         }
         console.log('here?', order.nuts);
 
-        // Nuts
-        if ((intent == 'no' || intent == 'yes') && order.nuts == undefined) {
-          console.log('Old Value! ', order.nuts);
-          order.nuts = intent;
-          console.log('Picking nuts! ', order.nuts);
-        }
-        console.log('here???', order.nuts);
         // Cherries
         if (
           (intent == 'no' || intent == 'yes') &&
@@ -96,6 +89,14 @@ app.get('/smssent', (req, res) => {
           console.log('Complete! ', order);
           // Call REST API here (order pizza, etc.)
         }
+
+        // Nuts
+        if ((intent == 'no' || intent == 'yes') && order.nuts == undefined) {
+          console.log('Old Value! ', order.nuts);
+          order.nuts = intent;
+          console.log('Picking nuts! ', order.nuts);
+        }
+        console.log('here???', order.nuts);
 
         const client = require('twilio')(
           process.env.TWILIO_SID,
