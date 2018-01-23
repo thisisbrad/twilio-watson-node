@@ -73,7 +73,7 @@ app.get('/smssent', (req, res) => {
         console.log('here?', order.nuts);
 
         // Nuts
-        if (intent == 'no' || (intent == 'yes' && !order.nuts)) {
+        if (intent == 'no' || (intent == 'yes' && order.nuts == undefined)) {
           order.nuts = intent;
           console.log('Picking nuts! ', order.nuts);
         }
@@ -81,7 +81,7 @@ app.get('/smssent', (req, res) => {
         // Cherries
         if (
           intent == 'no' ||
-          (intent == 'yes' && order.nuts && !orders.cherry)
+          (intent == 'yes' && order.nuts && orders.cherry == undefined)
         ) {
           // const order = contexts.splice(contextIndex, 1);
           order.cherry = intent;
