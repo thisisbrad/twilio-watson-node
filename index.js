@@ -73,7 +73,7 @@ app.get('/smssent', (req, res) => {
         console.log('here?', order.nuts);
 
         // Nuts
-        if (intent == 'no' || (intent == 'yes' && order.flavor)) {
+        if (intent == 'no' || (intent == 'yes' && !order.nuts)) {
           order.nuts = intent;
           console.log('Picking nuts! ', order.nuts);
         }
