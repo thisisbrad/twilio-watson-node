@@ -48,7 +48,7 @@ app.get('/smssent', (req, res) => {
       } else {
         console.log(response.output.text[0]);
         if (context == null) {
-          console.log('in here', context);
+          console.log('in here', response.context);
           order.from = number;
           contexts.push({ from: number, context: response.context });
         } else {
