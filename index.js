@@ -70,13 +70,14 @@ app.get('/smssent', (req, res) => {
           console.log(`They picked ${order.flavor} flavor.`);
           console.log(order);
         }
+        console.log('here?', order.nuts);
 
         // Nuts
         if (intent == 'no' || (intent == 'yes' && order.flavor)) {
           order.nuts = intent;
           console.log('Picking nuts! ', order.nuts);
         }
-
+        console.log('here???', order.nuts);
         // Cherries
         if (intent == 'no' || (intent == 'yes' && order.nuts)) {
           // const order = contexts.splice(contextIndex, 1);
