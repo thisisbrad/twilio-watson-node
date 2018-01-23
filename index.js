@@ -10,15 +10,19 @@ mongoose.connect(mongoURI);
 
 const Order = require('./models/Order');
 
+// ### Put in Waston Service
 let contexts = [];
 const order = {}; // Setup empty order
 const sizeRx = RegExp('size_*', 'g'); // RegEx for size
 
+// ### Put in routes
 app.get('/smssent', (req, res) => {
+  // ### Put in Waston Service
   const message = req.query.Body; // Grabs the text message
   const number = req.query.From; // Grabs the from cell number
   const twilioNumber = req.query.To; // Grabs the Twilio cell number
 
+  // ### Put in Waston Service
   let context = null; // Sets up the context of Watson convo
   let index = 0;
   let contextIndex = 0;
@@ -44,6 +48,7 @@ app.get('/smssent', (req, res) => {
   // console.log(JSON.stringify(context));
   // console.log(contexts.length);
 
+  // ### Put in Waston Service
   conversation.message(
     {
       input: { text: message },
@@ -56,6 +61,7 @@ app.get('/smssent', (req, res) => {
       } else {
         // console.log(response);
         // console.log(response.output.text[0]);
+        // ### Make a switch statement. ONly one case will be true while processing
         if (context == null) {
           order.convo_id = response.context.conversation_id; // attach convo id to the order
           order.from = number; // attach the user's phone number
@@ -97,16 +103,17 @@ app.get('/smssent', (req, res) => {
           const context = contexts.splice(contextIndex, 1);
           console.log('Complete! ', order);
           const newOrder = new Order(order);
-          newOrder.save();
-          // SAVE TO MONGODB!
-          // Then send push notifaction!
+          newOrder.save(); // SAVE TO MONGODB!
+          // TODO: Then send push notifaction!
         }
 
+        // ### Put in Twilio Service
         const client = require('twilio')(
           process.env.TWILIO_SID,
           process.env.TWILIO_TOKEN
         );
 
+        // ### Put in Twilio Service
         client.messages.create(
           {
             from: twilioNumber,
