@@ -3,7 +3,8 @@ const ConversationV1 = require('watson-developer-cloud/conversation/v1');
 
 const app = express();
 
-var contexts = [];
+let contexts = [];
+const order = {};
 
 app.get('/smssent', (req, res) => {
   const message = req.query.Body; // Grabs the text message
@@ -32,7 +33,7 @@ app.get('/smssent', (req, res) => {
     version_date: ConversationV1.VERSION_DATE_2016_09_20
   });
 
-  console.log('CURRENT CONVO 1:', JSON.stringify(context));
+  console.log(JSON.stringify(context));
   console.log(contexts.length);
 
   conversation.message(
@@ -45,9 +46,10 @@ app.get('/smssent', (req, res) => {
       if (err) {
         console.error(err);
       } else {
-        console.log('2', response.output.text[0]);
-        console.log('2', response);
+        console.log(response.output.text[0]);
         if (context == null) {
+          console.log('in here', context);
+          order.from = number;
           contexts.push({ from: number, context: response.context });
         } else {
           contexts[contextIndex].context = response.context;
@@ -55,6 +57,11 @@ app.get('/smssent', (req, res) => {
 
         let intent = response.intents[0].intent;
         console.log(intent);
+        if (intent == 'done') {
+          // const order = contexts.splice(contextIndex, 1);
+          // Call REST API here (order pizza, etc.)
+        }
+
         if (intent == 'done') {
           const order = contexts.splice(contextIndex, 1);
           console.log('place ', contextIndex);
