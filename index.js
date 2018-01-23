@@ -63,8 +63,8 @@ app.get('/smssent', (req, res) => {
           console.log(`They picked a ${order.size} size`);
         }
 
-        if (intent == 'flavour') {
-          console.log('IN FLAVOUR! ', response.intents[0]);
+        if (intent == 'flavor') {
+          console.log('IN flavor! ', response.intents[0]);
           // Call REST API here (order pizza, etc.)
         }
 
