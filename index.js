@@ -4,8 +4,8 @@ const ConversationV1 = require('watson-developer-cloud/conversation/v1');
 const app = express();
 
 let contexts = [];
-const order = {};
-const sizeRx = RegExp('size_*', 'g');
+const order = {}; // Setup empty order
+const sizeRx = RegExp('size_*', 'g'); // RegEx for size
 
 app.get('/smssent', (req, res) => {
   const message = req.query.Body; // Grabs the text message
@@ -59,18 +59,16 @@ app.get('/smssent', (req, res) => {
 
         let intent = response.intents[0].intent;
         console.log(intent);
+        // Catpure selected size
         if (sizeRx.test(intent)) {
           order.size = intent.replace('size_', '');
           console.log(`They picked a ${order.size} size.`);
         }
-
+        // Catpure selected flavor
         if (intent == 'flavor') {
-          console.log('IN flavor! ', response.entities[0].value);
           order.flavor = response.entities[0].value;
           console.log(`They picked ${order.flavor} flavor.`);
-          console.log(order);
         }
-        console.log('here?', order.nuts);
 
         // Cherries
         if (
@@ -78,25 +76,21 @@ app.get('/smssent', (req, res) => {
           order.nuts &&
           order.cherry == undefined
         ) {
-          // const order = contexts.splice(contextIndex, 1);
           order.cherry = intent;
           console.log('Picking CHERRY! ', order.cherry);
-          // Call REST API here (order pizza, etc.)
-        }
-
-        if (intent == 'done') {
-          // const order = contexts.splice(contextIndex, 1);
-          console.log('Complete! ', order);
-          // Call REST API here (order pizza, etc.)
         }
 
         // Nuts
         if ((intent == 'no' || intent == 'yes') && order.nuts == undefined) {
-          console.log('Old Value! ', order.nuts);
           order.nuts = intent;
           console.log('Picking nuts! ', order.nuts);
         }
-        console.log('here???', order.nuts);
+
+        if (intent == 'done') {
+          const context = contexts.splice(contextIndex, 1);
+          console.log('Complete! ', order);
+          // SAVE TO MONGODB!
+        }
 
         const client = require('twilio')(
           process.env.TWILIO_SID,
