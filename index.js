@@ -61,6 +61,8 @@ app.get('/smssent', (req, res) => {
         if (sizeRx.test(intent)) {
           // deep dive into the data
           console.log('IN SIZE!', response.intents);
+          const size = intent.replace('size_', '');
+          console.log(`They picked a ${size} size`);
         }
 
         if (intent == 'done') {
