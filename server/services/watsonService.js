@@ -35,9 +35,6 @@ async function sendMessage(message, number, twilioNumber) {
     index += 1;
   });
 
-  // log.info('CONTEXT: ', JSON.stringify(context));
-  // log.info('where at', contexts.length);
-
   conversation.message(
     {
       input: { text: message },
@@ -57,7 +54,6 @@ async function sendMessage(message, number, twilioNumber) {
       }
 
       const { intent } = response.intents[0];
-      // console.log(intent);
 
       if (sizeRx.test(intent)) {
         order.size = intent.replace('size_', ''); // Catpure selected size
@@ -104,8 +100,6 @@ async function sendMessage(message, number, twilioNumber) {
       );
     }
   );
-
-  // log.info('DEBUG!', message, number, twilioNumber);
 }
 
 module.exports = {
