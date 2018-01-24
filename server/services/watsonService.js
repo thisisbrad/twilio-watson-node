@@ -1,3 +1,7 @@
+const config = require('../config');
+
+const log = config.logger;
+
 const contexts = [];
 // const order = {}; // Setup empty order
 // const sizeRx = RegExp('size_*', 'g'); // RegEx for size
@@ -11,13 +15,14 @@ async function sendMessage(message, number, twilioNumber) {
   contexts.forEach(value => {
     // console.log(value.from);
     if (value.from === number) {
+      log.info('CONTEXT: ', context);
       context = value.context;
       contextIndex = index;
     }
     index += 1;
   });
 
-  console.log('DEBUG!', message, number, twilioNumber);
+  log.info('DEBUG!', message, number, twilioNumber);
 }
 
 module.exports = {
