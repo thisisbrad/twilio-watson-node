@@ -46,8 +46,9 @@ async function sendMessage(message, number, twilioNumber) {
 
       // console.log(response.output.text[0]);
       if (context === null) {
-        order.convo_id = response.context.conversation_id; // attach convo id to the order
+        order.convoId = response.context.conversation_id; // attach convo id to the order
         order.from = number; // attach the user's phone number
+        order.status = 'Just Placed'; // attach the user's phone number
         contexts.push({ from: number, context: response.context });
       } else {
         contexts[contextIndex].context = response.context;

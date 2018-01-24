@@ -1,5 +1,4 @@
 const bunyan = require('bunyan');
-const error = require('../bin/tmp/error.log');
 
 const appname = 'Waston';
 
