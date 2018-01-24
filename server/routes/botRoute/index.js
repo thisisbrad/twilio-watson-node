@@ -7,7 +7,6 @@ module.exports = config => {
   const waston = wastonService;
 
   router.get('/', async (req, res) => {
-    log.info('here');
     const message = req.query.Body; // Grabs the text message
     const number = req.query.From; // Grabs the from cell number
     const twilioNumber = req.query.To; // Grabs the Twilio cell number
