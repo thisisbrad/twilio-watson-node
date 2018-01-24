@@ -14,7 +14,8 @@ const contexts = [];
 // const sizeRx = RegExp('size_*', 'g'); // RegEx for size
 
 async function sendMessage(message, number, twilioNumber) {
-  // coming in!
+  // You know, debugging stuff
+  log.info(`Recieved message from ${number} saying '${message}'`);
 
   let context = null; // Sets up the context of Watson convo
   let index = 0;
