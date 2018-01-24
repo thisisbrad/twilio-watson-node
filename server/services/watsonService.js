@@ -1,3 +1,7 @@
+const contexts = [];
+// const order = {}; // Setup empty order
+// const sizeRx = RegExp('size_*', 'g'); // RegEx for size
+
 async function sendMessage(message, number, twilioNumber) {
   // coming in!
 
