@@ -1,7 +1,12 @@
 const ConversationV1 = require('watson-developer-cloud/conversation/v1');
+const client = require('twilio');
 const config = require('../config');
 
+// Setup Twilio
+client(process.env.TWILIO_SID, process.env.TWILIO_TOKEN);
+
 const log = config.logger;
+
 // Setup the Watson Converstion with your keys. Use .env file, duh!
 const conversation = new ConversationV1({
   username: process.env.WATSON_KEY,
@@ -10,8 +15,8 @@ const conversation = new ConversationV1({
 });
 
 const contexts = [];
-// const order = {}; // Setup empty order
-// const sizeRx = RegExp('size_*', 'g'); // RegEx for size
+const order = {}; // Setup empty order
+const sizeRx = RegExp('size_*', 'g'); // RegEx for size
 
 async function sendMessage(message, number, twilioNumber) {
   // You know, debugging stuff
@@ -31,6 +36,75 @@ async function sendMessage(message, number, twilioNumber) {
 
   log.info('CONTEXT: ', JSON.stringify(context));
   log.info('where at', contexts.length);
+
+  conversation.message(
+    {
+      input: { text: message },
+      workspace_id: process.env.WATSON_WORKSPACE_ID,
+      context
+    },
+    (err, response) => {
+      if (err) throw err;
+
+      // console.log(response.output.text[0]);
+      if (context == null) {
+        order.convo_id = response.context.conversation_id; // attach convo id to the order
+        order.from = number; // attach the user's phone number
+        contexts.push({ from: number, context: response.context });
+      } else {
+        contexts[contextIndex].context = response.context;
+      }
+
+      const { intent } = response.intents[0];
+      console.log(intent);
+
+      if (sizeRx.test(intent)) {
+        order.size = intent.replace('size_', ''); // Catpure selected size
+        console.log(`They picked a ${order.size} size.`);
+      }
+
+      if (intent == 'flavor') {
+        order.flavor = response.entities[0].value; // Catpure selected flavor
+        console.log(`They picked ${order.flavor} flavor.`);
+      }
+
+      // Cherries
+      if (
+        (intent == 'no' || intent == 'yes') &&
+        order.nuts &&
+        order.cherry == undefined
+      ) {
+        order.cherry = intent;
+        console.log('Picking CHERRY! ', order.cherry);
+      }
+
+      // Nuts
+      if ((intent == 'no' || intent == 'yes') && order.nuts == undefined) {
+        order.nuts = intent;
+        console.log('Picking nuts! ', order.nuts);
+      }
+
+      if (intent == 'done') {
+        // const context = contexts.splice(contextIndex, 1);
+        console.log('Complete! ', order);
+        // const newOrder = new Order(order);
+        // newOrder.save(); // SAVE TO MONGODB!
+      }
+
+      client.messages.create(
+        {
+          from: twilioNumber,
+          to: number,
+          body: response.output.text[0]
+        },
+        (err, message) => {
+          if (err) {
+            console.error(err.message);
+          }
+        }
+      );
+    }
+  );
 
   // log.info('DEBUG!', message, number, twilioNumber);
 }
