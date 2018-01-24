@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const OrderSchema = mongoose.Schema(
   {
-    convo_id: { type: String, required: true, index: { unique: true } },
+    convoId: { type: String, required: true, index: { unique: true } },
     from: { type: String, required: true, index: true }, // Needs to be Number(7)
     status: { type: String, required: true, index: false },
     size: { type: String, required: true, index: false },
