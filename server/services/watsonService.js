@@ -2,9 +2,6 @@ const ConversationV1 = require('watson-developer-cloud/conversation/v1');
 const client = require('twilio');
 const config = require('../config');
 
-// Setup Twilio
-client(process.env.TWILIO_SID, process.env.TWILIO_TOKEN);
-
 const log = config.logger;
 
 // Setup the Watson Converstion with your keys. Use .env file, duh!
@@ -91,6 +88,8 @@ async function sendMessage(message, number, twilioNumber) {
         // newOrder.save(); // SAVE TO MONGODB!
       }
 
+      // Setup Twilio
+      client(process.env.TWILIO_SID, process.env.TWILIO_TOKEN);
       client.messages.create(
         {
           from: twilioNumber,
