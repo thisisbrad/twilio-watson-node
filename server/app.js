@@ -1,5 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+
 const routeHandler = require('./routes');
 
 module.exports = config => {
@@ -7,6 +8,9 @@ module.exports = config => {
 
   const app = express();
   app.set('trust proxy', 1); // trust first proxy
+
+  app.use(bodyParser.json());
+  app.use(bodyParser.urlencoded({ extended: true }));
 
   // Routes
   app.use('/', routeHandler(config));
@@ -17,9 +21,6 @@ module.exports = config => {
     err.status = 404;
     next(err);
   });
-
-  app.use(bodyParser.json());
-  app.use(bodyParser.urlencoded({ extended: false }));
 
   return app;
 };
