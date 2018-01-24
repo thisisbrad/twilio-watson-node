@@ -32,7 +32,7 @@ async function sendMessage(message, number, twilioNumber) {
   log.info('CONTEXT: ', JSON.stringify(context));
   log.info('where at', contexts.length);
 
-  log.info('DEBUG!', message, number, twilioNumber);
+  // log.info('DEBUG!', message, number, twilioNumber);
 }
 
 module.exports = {
