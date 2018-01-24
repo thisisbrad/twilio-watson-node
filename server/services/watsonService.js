@@ -3,6 +3,7 @@ const client = require('twilio')(
   process.env.TWILIO_SID,
   process.env.TWILIO_TOKEN
 );
+const orderService = require('./orderService');
 const config = require('../config');
 
 const log = config.logger;
@@ -43,7 +44,7 @@ async function sendMessage(message, number, twilioNumber) {
       workspace_id: process.env.WATSON_WORKSPACE_ID,
       context
     },
-    (err, response) => {
+    async (err, response) => {
       if (err) throw err;
 
       // console.log(response.output.text[0]);
@@ -86,7 +87,7 @@ async function sendMessage(message, number, twilioNumber) {
 
       if (intent === 'done') {
         console.log('Complete! ', order);
-        // const newOrder = new Order(order);
+        await orderService.create(order);
         // newOrder.save(); // SAVE TO MONGODB!
       }
 
