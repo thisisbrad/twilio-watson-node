@@ -47,7 +47,7 @@ async function sendMessage(message, number, twilioNumber) {
       if (err) throw err;
 
       // console.log(response.output.text[0]);
-      if (context == null) {
+      if (context === null) {
         order.convo_id = response.context.conversation_id; // attach convo id to the order
         order.from = number; // attach the user's phone number
         contexts.push({ from: number, context: response.context });
@@ -63,14 +63,14 @@ async function sendMessage(message, number, twilioNumber) {
         console.log(`They picked a ${order.size} size.`);
       }
 
-      if (intent == 'flavor') {
+      if (intent === 'flavor') {
         order.flavor = response.entities[0].value; // Catpure selected flavor
         console.log(`They picked ${order.flavor} flavor.`);
       }
 
       // Cherries
       if (
-        (intent == 'no' || intent == 'yes') &&
+        (intent === 'no' || intent === 'yes') &&
         order.nuts &&
         order.cherry == undefined
       ) {
@@ -79,13 +79,12 @@ async function sendMessage(message, number, twilioNumber) {
       }
 
       // Nuts
-      if ((intent == 'no' || intent == 'yes') && order.nuts == undefined) {
+      if ((intent === 'no' || intent === 'yes') && order.nuts === undefined) {
         order.nuts = intent;
         console.log('Picking nuts! ', order.nuts);
       }
 
-      if (intent == 'done') {
-        // const context = contexts.splice(contextIndex, 1);
+      if (intent === 'done') {
         console.log('Complete! ', order);
         // const newOrder = new Order(order);
         // newOrder.save(); // SAVE TO MONGODB!
