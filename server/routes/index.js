@@ -7,7 +7,7 @@ module.exports = config => {
     res.json({ howdy: 'partner' });
   });
 
-  router.get('/smssent', botRoute(config));
+  router.use('/smssent', botRoute(config));
 
   return router;
 };
