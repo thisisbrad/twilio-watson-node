@@ -27,8 +27,8 @@ async function sendMessage(message, number, twilioNumber) {
   let contextIndex = 0;
   contexts.forEach(value => {
     if (value.from === number) {
-      log.info('CONTEXT: ', context);
       context = value.context;
+      log.info('CONTEXT: ', context);
       contextIndex = index;
     }
     index += 1;
@@ -72,7 +72,7 @@ async function sendMessage(message, number, twilioNumber) {
       if (
         (intent === 'no' || intent === 'yes') &&
         order.nuts &&
-        order.cherry == undefined
+        order.cherry === undefined
       ) {
         order.cherry = intent;
         console.log('Picking CHERRY! ', order.cherry);
@@ -96,9 +96,9 @@ async function sendMessage(message, number, twilioNumber) {
           to: number,
           body: response.output.text[0]
         },
-        (err, message) => {
+        errTwilio => {
           if (err) {
-            console.error(err.message);
+            console.error(errTwilio.message);
           }
         }
       );
