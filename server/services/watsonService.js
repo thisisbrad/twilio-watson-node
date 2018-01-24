@@ -15,7 +15,7 @@ const contexts = [];
 
 async function sendMessage(message, number, twilioNumber) {
   // You know, debugging stuff
-  log.info(`Recieved message from ${number} saying '${message}'`);
+  // log.info(`Recieved message from ${number} saying '${message}'`);
 
   let context = null; // Sets up the context of Watson convo
   let index = 0;
@@ -29,8 +29,8 @@ async function sendMessage(message, number, twilioNumber) {
     index += 1;
   });
 
-  log.info(JSON.stringify(context));
-  log.info(contexts.length);
+  log.info('CONTEXT: ', JSON.stringify(context));
+  log.info('where at', contexts.length);
 
   log.info('DEBUG!', message, number, twilioNumber);
 }
