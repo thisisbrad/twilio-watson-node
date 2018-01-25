@@ -9,7 +9,6 @@ async function getOne(id) {
 }
 
 async function create(data) {
-  console.log('Its here! ', data.convoId);
   const order = new Order(data);
   return order.save();
 }
