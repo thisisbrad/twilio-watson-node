@@ -19,11 +19,11 @@ module.exports = config => {
 
   // Update Order
   router.post('/', async (req, res) => {
-    const { _id, convoId, from, size, flavor, nuts, cherry } = req.body;
+    const { _id, convoId, from, size, flavor, nuts, cherry, status } = req.body;
     log.info('BODY', req.body);
 
     try {
-      const itemData = { convoId, from, size, flavor, nuts, cherry };
+      const itemData = { convoId, from, size, flavor, nuts, cherry, status };
       const item = await orderService.update(_id, itemData);
       return res.json({ item });
     } catch (err) {
