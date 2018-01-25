@@ -27,12 +27,12 @@ async function sendMessage(message, number, twilioNumber) {
   let index = 0;
   let contextIndex = 0;
   contexts.forEach(value => {
-    // if (value.from === number) {
-    //   context = value.context;
-    //   log.info('CONTEXT: ', context.system);
-    //   contextIndex = index;
-    // }
-    // index += 1;
+    if (value.from === number) {
+      context = value.context;
+      // log.info('CONTEXT: ', context.system);
+      contextIndex = index;
+    }
+    index += 1;
   });
 
   conversation.message(
@@ -83,9 +83,12 @@ async function sendMessage(message, number, twilioNumber) {
       }
 
       if (intent === 'done') {
-        const placed = await orderService.create(order); // Save to MongoDB
-        console.log('Complete! ', placed); // Just to log what comes back from MongoDB
-      }
+        try {
+          const placed = await orderService.create(order); // Save to MongoDB
+          console.log('Complete! ', placed); // Just to log what comes back from MongoDB}
+        } catch(err){
+          log.fatal(err)
+        }
 
       client.messages.create(
         {
