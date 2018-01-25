@@ -27,12 +27,12 @@ async function sendMessage(message, number, twilioNumber) {
   let index = 0;
   let contextIndex = 0;
   contexts.forEach(value => {
-    if (value.from === number) {
-      context = value.context;
-      log.info('CONTEXT: ', context.system);
-      contextIndex = index;
-    }
-    index += 1;
+    // if (value.from === number) {
+    //   context = value.context;
+    //   log.info('CONTEXT: ', context.system);
+    //   contextIndex = index;
+    // }
+    // index += 1;
   });
 
   conversation.message(
