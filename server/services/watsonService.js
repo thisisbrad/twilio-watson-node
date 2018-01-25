@@ -15,7 +15,7 @@ const conversation = new ConversationV1({
   version_date: ConversationV1.VERSION_DATE_2016_09_20
 });
 
-const contexts = [];
+let contexts = [];
 const order = {}; // Setup empty order
 const sizeRx = RegExp('size_*', 'g'); // RegEx for size
 
@@ -87,6 +87,7 @@ async function sendMessage(message, number, twilioNumber) {
         try {
           console.log('About to place: ', order); // Just to log what comes back from MongoDB}
           const placed = await orderService.create(order); // Save to MongoDB
+          contexts = []; // Clears out convo context
           context = null; // Clears out convo context
           console.log('Complete! ', placed); // Just to log what comes back from MongoDB
         } catch (err) {
