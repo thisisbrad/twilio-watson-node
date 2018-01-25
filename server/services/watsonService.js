@@ -86,9 +86,10 @@ async function sendMessage(message, number, twilioNumber) {
         try {
           const placed = await orderService.create(order); // Save to MongoDB
           console.log('Complete! ', placed); // Just to log what comes back from MongoDB}
-        } catch(err){
-          log.fatal(err)
+        } catch (err) {
+          log.fatal(err);
         }
+      }
 
       client.messages.create(
         {
