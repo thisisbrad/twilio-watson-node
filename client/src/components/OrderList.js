@@ -8,12 +8,33 @@ import {
   TouchableOpacity
 } from 'react-native';
 
-import { LinearGradient } from 'expo';
 import { Ionicons } from '@expo/vector-icons';
 
 class OrderList extends Component {
   state = {
-    refreshing: false
+    refreshing: false,
+    orders: [
+      {
+        _id: '5a692729114627000a9d988b',
+        convoId: '589c01bd-157b-4eb0-a520-9f06c5538cf4',
+        from: '+19545405650!',
+        status: 'damn',
+        size: 'medium!',
+        flavor: 'Chocolate!',
+        nuts: 'no!',
+        cherry: 'yes!'
+      },
+      {
+        _id: '3dd92729114627000a9d942h',
+        convoId: '555c01bd-157b-4eb0-a520-9f06c5538cf4',
+        from: '+19545405650!',
+        status: 'damn',
+        size: 'medium!',
+        flavor: 'Chocolate!',
+        nuts: 'no!',
+        cherry: 'yes!'
+      }
+    ]
   };
 
   onRefresh = async () => {
@@ -26,30 +47,14 @@ class OrderList extends Component {
 
   renderOrders = () => {
     const { orders } = this.state;
-    return orders.map((todo, index) => (
-      <TodoItem
-        key={todo._id}
-        id={todo._id}
-        index={index}
-        checked={todo.checked}
-        text={todo.text}
-      />
+    return orders.map((order, index) => (
+      <Text key={order._id}> {order.flavor} </Text>
     ));
   };
 
   render() {
     return (
       <View style={styles.container}>
-        <LinearGradient
-          colors={['#BCE3E7', '#75CBD0']}
-          style={{
-            position: 'absolute',
-            left: 0,
-            right: 0,
-            top: 0,
-            height: 600
-          }}
-        />
         <View style={styles.bar}>
           <TouchableOpacity style={styles.barButtons}>
             <Ionicons name="md-close" size={22} color="#BCE3E7" />
@@ -70,12 +75,14 @@ class OrderList extends Component {
           }
           contentContainerStyle={styles.list}
           automaticallyAdjustContentInsets={false}
+          horizontal
+          pagingEnabled
         >
           {this.renderOrders()}
         </ScrollView>
-        <TouchableOpacity style={styles.button} onPress={this.logout}>
+        {/*<TouchableOpacity style={styles.button} onPress={this.logout}>
           <Text style={styles.buttonText}>LOGOUT</Text>
-        </TouchableOpacity>
+        </TouchableOpacity>*/}
       </View>
     );
   }
