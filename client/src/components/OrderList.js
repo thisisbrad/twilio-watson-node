@@ -21,9 +21,9 @@ class OrderList extends Component {
         convoId: '589c01bd-157b-4eb0-a520-9f06c5538cf4',
         from: '+19545405650!',
         status: 'damn',
-        size: 'Medium',
+        size: 'medium',
         flavor: 'Chocolate',
-        nuts: 'no',
+        nuts: 'yes',
         cherry: 'yes'
       },
       {
@@ -31,9 +31,9 @@ class OrderList extends Component {
         convoId: '555c01bd-157b-4eb0-a520-9f06c5538cf4',
         from: '+19545405650!',
         status: 'damn',
-        size: 'Large',
+        size: 'large',
         flavor: 'Vanilla',
-        nuts: 'no',
+        nuts: 'yes',
         cherry: 'yes'
       }
     ]

@@ -14,6 +14,7 @@
   "rules": {
     "no-use-before-define": 0,
     "comma-dangle": 0,
+    "arrow-parens": ["error", "as-needed"],
     "react/prefer-stateless-function": 1,
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }]
   }
