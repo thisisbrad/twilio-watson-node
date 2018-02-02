@@ -34,7 +34,7 @@ class OrderList extends Component {
         size: 'Large',
         flavor: 'Vanilla',
         nuts: 'no',
-        cherry: 'yes '
+        cherry: 'yes'
       }
     ]
   };

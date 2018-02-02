@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 
+import Svg, { Image } from 'react-native-svg';
+
 class OrderCard extends Component {
   state = {
     status: null
@@ -23,10 +25,22 @@ class OrderCard extends Component {
       status
     } = this.props;
 
+    // const SVGpath = `../../assets/svgs/${size}-${flavor}-${cherry}-${nuts}.svg`;
+    const SVGpath = '../../assets/svgs/large-chocolate-yes-yes.svg';
+    console.log('PATH', SVGpath);
+
     return (
       <View style={styles.card}>
         <View>
-          <Text>Image!</Text>
+          <Svg height="100" width="100">
+            <Image
+              x="5%"
+              y="5%"
+              width="50%"
+              height="50%"
+              href={require(SVGpath)}
+            />
+          </Svg>
         </View>
         <View>
           <Text style={styles.sizeTitle}>{size}</Text>
