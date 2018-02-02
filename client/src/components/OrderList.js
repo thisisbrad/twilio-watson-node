@@ -10,6 +10,8 @@ import {
 
 import { Ionicons } from '@expo/vector-icons';
 
+import OrderCard from './OrderCard';
+
 class OrderList extends Component {
   state = {
     refreshing: false,
@@ -48,7 +50,7 @@ class OrderList extends Component {
   renderOrders = () => {
     const { orders } = this.state;
     return orders.map((order, index) => (
-      <Text key={order._id}> {order.flavor} </Text>
+      <OrderCard key={order._id} {...order} />
     ));
   };
 
