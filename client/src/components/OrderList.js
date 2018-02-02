@@ -82,9 +82,6 @@ class OrderList extends Component {
         >
           {this.renderOrders()}
         </ScrollView>
-        {/*<TouchableOpacity style={styles.button} onPress={this.logout}>
-          <Text style={styles.buttonText}>LOGOUT</Text>
-        </TouchableOpacity>*/}
       </View>
     );
   }
