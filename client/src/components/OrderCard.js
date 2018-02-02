@@ -25,15 +25,20 @@ class OrderCard extends Component {
 
     return (
       <View style={styles.card}>
-        <Text style={styles.sizeTitle}>{size}</Text>
-        <Text style={styles.flavorTitle}>{flavor} Sundae</Text>
-
-        <View style={styles.orderDetails}>
-          <Text>Cherry: {cherry}</Text>
-          <Text>Nuts: {nuts}</Text>
+        <View>
+          <Text>Image!</Text>
         </View>
-        <Text style={styles.flavorTitle}>{from}</Text>
-        <Text>{this.state.status}</Text>
+        <View>
+          <Text style={styles.sizeTitle}>{size}</Text>
+          <Text style={styles.flavorTitle}>{flavor} Sundae</Text>
+
+          <View style={styles.orderDetails}>
+            <Text style={styles.orderDetailsText}>Cherry: {cherry}</Text>
+            <Text style={styles.orderDetailsText}>Nuts: {nuts}</Text>
+          </View>
+          <Text style={styles.flavorTitle}>{from}</Text>
+          <Text>{this.state.status}</Text>
+        </View>
       </View>
     );
   }
@@ -44,10 +49,18 @@ const styles = StyleSheet.create({
     flex: 1,
     // justifyContent: 'flex-start',
     // alignItems: 'stretch',
-    // height: 200,
+    flexDirection: 'row',
+    height: 250,
+    width: 300,
     margin: 10,
     padding: 10,
     backgroundColor: 'white'
+  },
+  iceCream: {
+    // Holds Ice Cream Image
+  },
+  order: {
+    // Order side of the card
   },
   flavorTitle: {
     fontFamily: 'supermercado',
@@ -61,6 +74,10 @@ const styles = StyleSheet.create({
   },
   orderDetails: {
     flexDirection: 'row'
+  },
+  orderDetailsText: {
+    marginRight: 10,
+    color: '#9ACED0'
   },
   button: { backgroundColor: '#FFCC25' },
   buttonText: {

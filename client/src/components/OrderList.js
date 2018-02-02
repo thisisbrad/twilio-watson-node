@@ -23,8 +23,8 @@ class OrderList extends Component {
         status: 'damn',
         size: 'Medium',
         flavor: 'Chocolate',
-        nuts: 'no!',
-        cherry: 'yes!'
+        nuts: 'no',
+        cherry: 'yes'
       },
       {
         _id: '3dd92729114627000a9d942h',
