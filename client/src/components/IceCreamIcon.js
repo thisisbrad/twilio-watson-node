@@ -1,7 +1,10 @@
 import React from 'react';
-import { View, Text, Image, StyleSheet } from 'react-native';
+import { View, Image, Text, StyleSheet } from 'react-native';
+import resolveAssetSource from 'react-native/Libraries/Image/resolveAssetSource';
 
 import _ from 'lodash';
+
+import SvgImage from './SvgImage';
 
 const IceCreamIcon = props => {
   // console.info('ICON: ', props);
@@ -35,7 +38,9 @@ const IceCreamIcon = props => {
     const macthingIcon = _.find(icons, { size, flavor, cherry, nuts });
     const imgNum = icons.indexOf(macthingIcon);
     console.log('FOUND IT!', macthingIcon, imgNum);
-    return <Image style={styles.stretch} source={svgs[imgNum].path} />;
+    const source = resolveAssetSource(svgs[imgNum].path);
+
+    return <SvgImage {...props} source={source} style={styles.stretch} />;
   };
 
   return <View>{renderIcon()}</View>;
@@ -43,8 +48,10 @@ const IceCreamIcon = props => {
 
 const styles = StyleSheet.create({
   stretch: {
-    width: 100,
-    height: 130
+    width: 150,
+    height: 180
+    // borderWidth: 1,
+    // borderColor: '#d6d7da'
   }
 });
 

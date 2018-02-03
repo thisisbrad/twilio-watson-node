@@ -27,7 +27,7 @@ class OrderCard extends Component {
 
     return (
       <View style={styles.card}>
-        <View>
+        <View style={styles.iceCream}>
           <IceCreamIcon {...this.props} />
         </View>
         <View>
@@ -53,13 +53,16 @@ const styles = StyleSheet.create({
     // alignItems: 'stretch',
     flexDirection: 'row',
     height: 250,
-    width: 300,
+    // width: 300,
     margin: 10,
     padding: 10,
     backgroundColor: 'white'
   },
   iceCream: {
     // Holds Ice Cream Image
+    // borderWidth: 1,
+    // borderColor: '#d6d7da'
+    paddingRight: 20
   },
   order: {
     // Order side of the card
