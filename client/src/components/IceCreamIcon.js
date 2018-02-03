@@ -4,7 +4,7 @@ import { View, Text, Image, StyleSheet } from 'react-native';
 import _ from 'lodash';
 
 const IceCreamIcon = props => {
-  console.info('ICON: ', props);
+  // console.info('ICON: ', props);
   const { _id, cherry, convoId, flavor, from, nuts, size, status } = props;
 
   const icons = [
@@ -21,24 +21,21 @@ const IceCreamIcon = props => {
 
   const svgs = [
     { path: require('../../assets/svgs/large-vanilla-yes-yes.svg') },
-    { size: 'large', flavor: 'Strawberry', cherry: 'yes', nuts: 'yes' },
-    { size: 'large', flavor: 'Chocolate', cherry: 'yes', nuts: 'yes' },
-    { size: 'medium', flavor: 'Vanilla', cherry: 'yes', nuts: 'yes' },
-    { size: 'medium', flavor: 'Strawberry', cherry: 'yes', nuts: 'yes' },
-    { size: 'medium', flavor: 'Chocolate', cherry: 'yes', nuts: 'yes' },
-    { size: 'small', flavor: 'Vanilla', cherry: 'yes', nuts: 'yes' },
-    { size: 'small', flavor: 'Strawberry', cherry: 'yes', nuts: 'yes' },
-    { size: 'small', flavor: 'Chocolate', cherry: 'yes', nuts: 'yes' }
+    { path: require('../../assets/svgs/large-strawberry-yes-yes.svg') },
+    { path: require('../../assets/svgs/large-chocolate-yes-yes.svg') },
+    { path: require('../../assets/svgs/medium-vanilla-yes-yes.svg') },
+    { path: require('../../assets/svgs/medium-strawberry-yes-yes.svg') },
+    { path: require('../../assets/svgs/medium-chocolate-yes-yes.svg') },
+    { path: require('../../assets/svgs/small-vanilla-yes-yes.svg') },
+    { path: require('../../assets/svgs/small-strawberry-yes-yes.svg') },
+    { path: require('../../assets/svgs/small-chocolate-yes-yes.svg') }
   ];
 
   const renderIcon = () => {
-    // const SVGpath = `../../assets/svgs/${size}-${flavor}-${cherry}-${nuts}.svg`;
-    // const stringPath = String(SVGpath);
-    // console.log('SVG Path', SVGpath);
     const macthingIcon = _.find(icons, { size, flavor, cherry, nuts });
     const imgNum = icons.indexOf(macthingIcon);
     console.log('FOUND IT!', macthingIcon, imgNum);
-    return <Image style={styles.stretch} source={svgs[0].path} />;
+    return <Image style={styles.stretch} source={svgs[imgNum].path} />;
   };
 
   return <View>{renderIcon()}</View>;
@@ -46,8 +43,8 @@ const IceCreamIcon = props => {
 
 const styles = StyleSheet.create({
   stretch: {
-    width: 50,
-    height: 200
+    width: 100,
+    height: 130
   }
 });
 
