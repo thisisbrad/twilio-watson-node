@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 
+import _ from 'lodash';
+
 import IceCreamIcon from './IceCreamIcon';
 
 class OrderCard extends Component {
@@ -30,13 +32,17 @@ class OrderCard extends Component {
         <View style={styles.iceCream}>
           <IceCreamIcon {...this.props} />
         </View>
-        <View>
-          <Text style={styles.sizeTitle}>{size}</Text>
-          <Text style={styles.flavorTitle}>{flavor} Sundae</Text>
+        <View style={styles.order}>
+          <Text style={styles.sizeTitle}>{_.capitalize(size)}</Text>
+          <Text style={styles.flavorTitle}>{_.capitalize(flavor)} Sundae</Text>
 
           <View style={styles.orderDetails}>
-            <Text style={styles.orderDetailsText}>Cherry: {cherry}</Text>
-            <Text style={styles.orderDetailsText}>Nuts: {nuts}</Text>
+            <Text style={styles.orderDetailsText}>
+              Cherry: {_.upperCase(cherry)}
+            </Text>
+            <Text style={styles.orderDetailsText}>
+              Nuts: {_.upperCase(nuts)}
+            </Text>
           </View>
           <Text style={styles.flavorTitle}>{from}</Text>
           <Text>{this.state.status}</Text>
@@ -66,6 +72,7 @@ const styles = StyleSheet.create({
   },
   order: {
     // Order side of the card
+    marginTop: 20
   },
   flavorTitle: {
     fontFamily: 'supermercado',

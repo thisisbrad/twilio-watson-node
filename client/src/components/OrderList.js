@@ -21,8 +21,8 @@ class OrderList extends Component {
         convoId: '589c01bd-157b-4eb0-a520-9f06c5538cf4',
         from: '+19545405650!',
         status: 'damn',
-        size: 'large',
-        flavor: 'Chocolate',
+        size: 'small',
+        flavor: 'Strawberry',
         nuts: 'yes',
         cherry: 'yes'
       },
@@ -78,7 +78,6 @@ class OrderList extends Component {
           contentContainerStyle={styles.list}
           automaticallyAdjustContentInsets={false}
           horizontal
-          pagingEnabled
         >
           {this.renderOrders()}
         </ScrollView>
