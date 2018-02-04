@@ -7,24 +7,46 @@ import {
   StyleSheet,
   TouchableOpacity
 } from 'react-native';
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import * as actionCreators from '../actions';
 
 import { Ionicons } from '@expo/vector-icons';
 
 import OrderCard from './OrderCard';
 
-import { fetchTodos } from '../actions/';
-
 class OrderList extends Component {
   state = {
-    refreshing: false
+    refreshing: false,
+    orders: [
+      {
+        _id: '5a692729114627000a9d988b',
+        convoId: '589c01bd-157b-4eb0-a520-9f06c5538cf4',
+        from: '+19545405650!',
+        status: 'damn',
+        size: 'large',
+        flavor: 'Chocolate',
+        nuts: 'yes',
+        cherry: 'yes'
+      },
+      {
+        _id: '3dd92729114627000a9d942h',
+        convoId: '555c01bd-157b-4eb0-a520-9f06c5538cf4',
+        from: '+19545405650!',
+        status: 'damn',
+        size: 'medium',
+        flavor: 'Vanilla',
+        nuts: 'yes',
+        cherry: 'yes'
+      }
+    ]
   };
 
   async componentDidMount() {
-    console.log('here?', this.props.orders);
-    const { dispatch } = this.props;
-    await dispatch(fetchTodos());
-    console.log('here?', this.props);
+    console.log('here?', this.props.dispatch);
+    // const { dispatch, fetchTodos } = this.props;
+    // await dispatch(fetchTodos());
+    // console.log('here?', this.props);
   }
 
   onRefresh = async () => {
@@ -32,12 +54,13 @@ class OrderList extends Component {
     this.setState({ refreshing: true });
     // const { dispatch } = this.props;
     // await dispatch(fetchTodos());
+    const bpb = 'dsdasd';
     this.setState({ refreshing: false });
     // console.log('where they at?', this.props);
   };
 
   renderOrders = () => {
-    const { orders } = this.props;
+    const { orders } = this.state;
     return orders.map((order, index) => (
       <OrderCard key={order._id} {...order} />
     ));
@@ -107,10 +130,14 @@ const styles = StyleSheet.create({
 });
 
 function mapStateToProps(state) {
-  // console.log(state);
+  console.log('the state', state);
   return {
     orders: state.orders
   };
 }
 
-export default connect(mapStateToProps)(OrderList);
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators(actionCreators, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(OrderList);
