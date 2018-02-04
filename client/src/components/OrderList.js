@@ -7,48 +7,37 @@ import {
   StyleSheet,
   TouchableOpacity
 } from 'react-native';
+import { connect } from 'react-redux';
 
 import { Ionicons } from '@expo/vector-icons';
 
 import OrderCard from './OrderCard';
 
+import { fetchTodos } from '../actions/';
+
 class OrderList extends Component {
   state = {
-    refreshing: false,
-    orders: [
-      {
-        _id: '5a692729114627000a9d988b',
-        convoId: '589c01bd-157b-4eb0-a520-9f06c5538cf4',
-        from: '+19545405650!',
-        status: 'damn',
-        size: 'small',
-        flavor: 'Strawberry',
-        nuts: 'yes',
-        cherry: 'yes'
-      },
-      {
-        _id: '3dd92729114627000a9d942h',
-        convoId: '555c01bd-157b-4eb0-a520-9f06c5538cf4',
-        from: '+19545405650!',
-        status: 'damn',
-        size: 'medium',
-        flavor: 'Vanilla',
-        nuts: 'yes',
-        cherry: 'yes'
-      }
-    ]
+    refreshing: false
   };
+
+  async componentDidMount() {
+    console.log('here?', this.props.orders);
+    const { dispatch } = this.props;
+    await dispatch(fetchTodos());
+    console.log('here?', this.props);
+  }
 
   onRefresh = async () => {
     console.log('Refreshing!!!');
     this.setState({ refreshing: true });
-    // const { auth, dispatch } = this.props;
-    // await dispatch(fetchTodos(auth));
+    // const { dispatch } = this.props;
+    // await dispatch(fetchTodos());
     this.setState({ refreshing: false });
+    // console.log('where they at?', this.props);
   };
 
   renderOrders = () => {
-    const { orders } = this.state;
+    const { orders } = this.props;
     return orders.map((order, index) => (
       <OrderCard key={order._id} {...order} />
     ));
@@ -77,7 +66,6 @@ class OrderList extends Component {
           }
           contentContainerStyle={styles.list}
           automaticallyAdjustContentInsets={false}
-          horizontal
         >
           {this.renderOrders()}
         </ScrollView>
@@ -118,4 +106,11 @@ const styles = StyleSheet.create({
   }
 });
 
-export default OrderList;
+function mapStateToProps(state) {
+  // console.log(state);
+  return {
+    orders: state.orders
+  };
+}
+
+export default connect(mapStateToProps)(OrderList);

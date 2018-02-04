@@ -7,7 +7,6 @@ import _ from 'lodash';
 import SvgImage from './SvgImage';
 
 const IceCreamIcon = props => {
-  // console.info('ICON: ', props);
   const { _id, cherry, convoId, flavor, from, nuts, size, status } = props;
 
   const icons = [
@@ -37,7 +36,6 @@ const IceCreamIcon = props => {
   const renderIcon = () => {
     const macthingIcon = _.find(icons, { size, flavor, cherry, nuts });
     const imgNum = icons.indexOf(macthingIcon);
-    console.log('FOUND IT!', macthingIcon, imgNum);
     const source = resolveAssetSource(svgs[imgNum].path);
 
     return <SvgImage {...props} source={source} style={styles.stretch} />;
@@ -50,8 +48,6 @@ const styles = StyleSheet.create({
   stretch: {
     width: 150,
     height: 180
-    // borderWidth: 1,
-    // borderColor: '#d6d7da'
   }
 });
 

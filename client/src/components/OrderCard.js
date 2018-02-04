@@ -55,23 +55,16 @@ class OrderCard extends Component {
 const styles = StyleSheet.create({
   card: {
     flex: 1,
-    // justifyContent: 'flex-start',
-    // alignItems: 'stretch',
     flexDirection: 'row',
     height: 250,
-    // width: 300,
     margin: 10,
     padding: 10,
     backgroundColor: 'white'
   },
   iceCream: {
-    // Holds Ice Cream Image
-    // borderWidth: 1,
-    // borderColor: '#d6d7da'
     paddingRight: 20
   },
   order: {
-    // Order side of the card
     marginTop: 20
   },
   flavorTitle: {
