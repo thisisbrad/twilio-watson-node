@@ -89,6 +89,7 @@ class OrderList extends Component {
           }
           contentContainerStyle={styles.list}
           automaticallyAdjustContentInsets={false}
+          horizontal
         >
           {this.renderOrders()}
         </ScrollView>
@@ -137,6 +138,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
+  console.log('nope?', dispatch);
   return bindActionCreators(actionCreators, dispatch);
 }
 
