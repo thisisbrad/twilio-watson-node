@@ -13,9 +13,4 @@ export const fetchTodos = () => async dispatch => {
   }
 };
 
-export const loadTodos = orders => {
-  return {
-    type: 'LOAD_TODOS',
-    orders
-  };
-};
+export const loadTodos = orders => ({ type: 'LOAD_TODOS', orders });

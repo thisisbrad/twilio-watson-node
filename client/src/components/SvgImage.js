@@ -18,7 +18,7 @@ class SvgImage extends Component {
   doFetch = props => {
     let uri = props.source && props.source.uri;
     if (uri) {
-      console.log('fetching', uri);
+      // console.log('fetching', uri);
       fetch(uri)
         .then(res => res.text())
         .then(text => this.setState({ fetchingUrl: uri, svgContent: text }))
