@@ -7,9 +7,8 @@ import {
   StyleSheet,
   TouchableOpacity
 } from 'react-native';
-import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import * as actionCreators from '../actions';
+import { fetchTodos } from '../actions';
 
 import { Ionicons } from '@expo/vector-icons';
 
@@ -17,36 +16,12 @@ import OrderCard from './OrderCard';
 
 class OrderList extends Component {
   state = {
-    refreshing: false,
-    orders: [
-      {
-        _id: '5a692729114627000a9d988b',
-        convoId: '589c01bd-157b-4eb0-a520-9f06c5538cf4',
-        from: '+19545405650!',
-        status: 'damn',
-        size: 'large',
-        flavor: 'Chocolate',
-        nuts: 'yes',
-        cherry: 'yes'
-      },
-      {
-        _id: '3dd92729114627000a9d942h',
-        convoId: '555c01bd-157b-4eb0-a520-9f06c5538cf4',
-        from: '+19545405650!',
-        status: 'damn',
-        size: 'medium',
-        flavor: 'Vanilla',
-        nuts: 'yes',
-        cherry: 'yes'
-      }
-    ]
+    refreshing: false
   };
 
   async componentDidMount() {
-    console.log('here?', this.props.dispatch);
-    // const { dispatch, fetchTodos } = this.props;
-    // await dispatch(fetchTodos());
-    // console.log('here?', this.props);
+    const { dispatch } = this.props;
+    await dispatch(fetchTodos());
   }
 
   onRefresh = async () => {
@@ -60,7 +35,7 @@ class OrderList extends Component {
   };
 
   renderOrders = () => {
-    const { orders } = this.state;
+    const { orders } = this.props;
     return orders.map((order, index) => (
       <OrderCard key={order._id} {...order} />
     ));
@@ -131,15 +106,10 @@ const styles = StyleSheet.create({
 });
 
 function mapStateToProps(state) {
-  console.log('the state', state);
+  // console.log('the state', state);
   return {
     orders: state.orders
   };
 }
 
-function mapDispatchToProps(dispatch) {
-  console.log('nope?', dispatch);
-  return bindActionCreators(actionCreators, dispatch);
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(OrderList);
+export default connect(mapStateToProps)(OrderList);
