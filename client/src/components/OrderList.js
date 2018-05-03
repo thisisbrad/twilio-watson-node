@@ -22,16 +22,29 @@ class OrderList extends Component {
   async componentDidMount() {
     const { dispatch } = this.props;
     await dispatch(fetchTodos());
+    console.log('OrderList -> ', this.props.orders);
   }
 
   onRefresh = async () => {
     console.log('Refreshing!!!');
     this.setState({ refreshing: true });
-    // const { dispatch } = this.props;
-    // await dispatch(fetchTodos());
-    const bpb = 'dsdasd';
+    const { dispatch } = this.props;
+    await dispatch(fetchTodos());
     this.setState({ refreshing: false });
+    console.log('OrderList -> ', this.props.orders);
     // console.log('where they at?', this.props);
+  };
+
+  onScroll = async e => {
+    const xOffset = e.nativeEvent.contentOffset.x;
+    console.log('Our offset is: ', xOffset);
+    // This works but fires to many times
+    // if (xOffset < -10) {
+    //   this.setState({ refreshing: true });
+    //   const { dispatch } = this.props;
+    //   await dispatch(fetchTodos());
+    //   this.setState({ refreshing: false });
+    // }
   };
 
   renderOrders = () => {
@@ -60,8 +73,12 @@ class OrderList extends Component {
             <RefreshControl
               refreshing={this.state.refreshing}
               onRefresh={this.onRefresh}
+              tintColor="teal"
+              title="Loading Orders..."
             />
           }
+          onScroll={this.onScroll}
+          scrollEventThrottle={16}
           contentContainerStyle={styles.list}
           automaticallyAdjustContentInsets={false}
           horizontal

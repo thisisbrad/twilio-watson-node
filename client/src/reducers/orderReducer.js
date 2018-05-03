@@ -4,6 +4,7 @@ export function orderReducer(state = [], action) {
   // console.log('### reducers ###', state, action);
   switch (action.type) {
     case 'LOAD_TODOS':
+      // console.log('ORDER LOAD REDUCER ', action);
       return action.orders;
     case 'ADD_TODO':
       return [...state, action.newTodo];
