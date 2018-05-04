@@ -4,6 +4,7 @@ import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import _ from 'lodash';
 
 import IceCreamIcon from './IceCreamIcon';
+import TimeCard from './TimeCard';
 
 class OrderCard extends Component {
   state = {
@@ -19,6 +20,7 @@ class OrderCard extends Component {
     const {
       _id,
       cherry,
+      createdAt,
       convoId,
       flavor,
       from,
@@ -47,6 +49,7 @@ class OrderCard extends Component {
           <Text style={styles.flavorTitle}>{from}</Text>
           <Text>{this.state.status}</Text>
         </View>
+        <TimeCard placedAt={createdAt} />
       </View>
     );
   }
@@ -56,7 +59,6 @@ const styles = StyleSheet.create({
   card: {
     flex: 1,
     flexDirection: 'row',
-    height: 250,
     margin: 10,
     padding: 10,
     backgroundColor: 'white'
@@ -83,13 +85,6 @@ const styles = StyleSheet.create({
   orderDetailsText: {
     marginRight: 10,
     color: '#9ACED0'
-  },
-  button: { backgroundColor: '#FFCC25' },
-  buttonText: {
-    padding: 8,
-    fontSize: 16,
-    color: 'white',
-    textAlign: 'center'
   }
 });
 

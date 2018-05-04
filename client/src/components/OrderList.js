@@ -32,13 +32,13 @@ class OrderList extends Component {
     await dispatch(fetchTodos());
     this.setState({ refreshing: false });
     console.log('OrderList -> ', this.props.orders);
-    // console.log('where they at?', this.props);
   };
 
   onScroll = async e => {
     const xOffset = e.nativeEvent.contentOffset.x;
     console.log('Our offset is: ', xOffset);
     // This works but fires to many times
+    // Maybe a scrollview to refresh, with the horizontal list inside of it?
     // if (xOffset < -10) {
     //   this.setState({ refreshing: true });
     //   const { dispatch } = this.props;
@@ -77,7 +77,7 @@ class OrderList extends Component {
               title="Loading Orders..."
             />
           }
-          onScroll={this.onScroll}
+          style={styles.scrollMenu}
           scrollEventThrottle={16}
           contentContainerStyle={styles.list}
           automaticallyAdjustContentInsets={false}
@@ -85,6 +85,9 @@ class OrderList extends Component {
         >
           {this.renderOrders()}
         </ScrollView>
+        <View style={styles.ordersDashboard}>
+          <Text style={styles.dashboardTitle}>Order Dashboard</Text>
+        </View>
       </View>
     );
   }
@@ -96,6 +99,26 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     alignItems: 'stretch',
     backgroundColor: '#BCE3E7'
+  },
+  scrollMenu: {
+    flex: 1,
+    paddingVertical: 20,
+    backgroundColor: 'pink'
+  },
+  ordersDashboard: {
+    flex: 1,
+    // justifyContent: 'flex-start',
+    // alignItems: 'stretch',
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+    borderTopWidth: 2,
+    borderColor: '#003548',
+    backgroundColor: '#97D7E2'
+  },
+  dashboardTitle: {
+    fontFamily: 'supermercado',
+    fontSize: 30,
+    color: '#003548'
   },
   bar: {
     flexDirection: 'row',
