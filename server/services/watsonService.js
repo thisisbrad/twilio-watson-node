@@ -95,6 +95,8 @@ async function sendMessage(message, number, twilioNumber) {
         }
       }
 
+      console.log('FROM NUMBER', twilioNumber);
+      console.log('SEND TO NUMBER', number);
       console.log('ABOUT TO SEND', response.output.text[0]);
 
       client.messages.create(
