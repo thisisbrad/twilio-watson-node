@@ -21,7 +21,7 @@ const sizeRx = RegExp('size_*', 'g'); // RegEx for size
 
 async function sendMessage(message, number, twilioNumber) {
   // You know, debugging stuff
-  // log.info(`Recieved message from ${number} saying '${message}'`);
+  log.info(`Recieved message from ${number} saying '${message}'`);
 
   let context = null; // Sets up the context of Watson convo
   let index = 0;
@@ -102,7 +102,7 @@ async function sendMessage(message, number, twilioNumber) {
           body: response.output.text[0]
         },
         errTwilio => {
-          if (err) {
+          if (errTwilio) {
             console.error(errTwilio.message);
           }
         }

@@ -8,9 +8,9 @@ function seconds(duration) {
   return format(duration.seconds());
 }
 
-function milliseconds(duration) {
-  return format(duration.milliseconds());
-}
+// function milliseconds(duration) {
+//   return format(duration.milliseconds());
+// }
 
 function format(duration) {
   if (!duration) {
