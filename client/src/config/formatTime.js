@@ -8,20 +8,15 @@ function seconds(duration) {
   return format(duration.seconds());
 }
 
-// function milliseconds(duration) {
-//   return format(duration.milliseconds());
-// }
-
 function format(duration) {
   if (!duration) {
     return '00';
-  } else if (('' + duration).length == 1) {
+  } else if (('' + duration).length === 1) {
     return '0' + duration;
-  } else if (('' + duration).length == 3) {
+  } else if (('' + duration).length === 3) {
     return ('' + duration).slice(0, 2);
-  } else {
-    return duration;
   }
+  return duration;
 }
 
 function convert(length) {
@@ -31,14 +26,8 @@ function convert(length) {
 
   const duration = moment.duration(length);
   const formattedDuration = `${minutes(duration)}:${seconds(duration)}`;
-  // formattedDuration += milliseconds(duration);
 
   return formattedDuration;
 }
 
 module.exports = convert;
-
-// console.log(
-//   'time card:',
-//   moment(end.diff(startTime)).format('m[m] s[s]')
-// );
